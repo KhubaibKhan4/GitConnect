@@ -72,6 +72,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.ktor.client.content.negociation)
             implementation(libs.ktor.client.kotlinx.serialization.json)
+            implementation(libs.ktor.client.logging)
         }
 
         commonTest.dependencies {
