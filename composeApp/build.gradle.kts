@@ -70,6 +70,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
+            implementation(libs.ktor.client.content.negociation)
+            implementation(libs.ktor.client.kotlinx.serialization.json)
         }
 
         commonTest.dependencies {
