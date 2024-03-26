@@ -3,8 +3,9 @@ package org.company.app.data.remote.api
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-import io.ktor.util.logging.Logger
 import kotlinx.serialization.json.Json
 import org.company.app.utils.Constant.TIME_OUT
 
@@ -17,6 +18,14 @@ object GithubApiClient {
                     ignoreUnknownKeys = true
                 }
             )
+        }
+        install(Logging) {
+            level = LogLevel.ALL
+            logger = object : io.ktor.client.plugins.logging.Logger {
+                override fun log(message: String) {
+                    println(message)
+                }
+            }
         }
         install(HttpTimeout) {
             socketTimeoutMillis = TIME_OUT
