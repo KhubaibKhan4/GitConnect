@@ -35,6 +35,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import org.company.app.presentation.navigation.model.NavigationItem
 import org.company.app.presentation.navigation.tabs.HomeTab
+import org.company.app.presentation.navigation.tabs.NotificationsTab
 import org.company.app.theme.AppTheme
 
 @Composable
@@ -77,6 +78,7 @@ fun AppContent() {
                     tonalElevation = 8.dp
                 ) {
                     TabItem(HomeTab)
+                    TabItem(NotificationsTab)
                 }
             }
         ) {
