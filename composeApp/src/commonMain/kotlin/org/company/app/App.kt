@@ -1,8 +1,11 @@
 package org.company.app
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
@@ -24,7 +27,14 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -34,6 +44,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import org.company.app.presentation.navigation.model.NavigationItem
+import org.company.app.presentation.navigation.sidebar.NavigationSideBar
 import org.company.app.presentation.navigation.tabs.ExploreTab
 import org.company.app.presentation.navigation.tabs.HomeTab
 import org.company.app.presentation.navigation.tabs.NotificationsTab
@@ -45,6 +56,7 @@ internal fun App() = AppTheme {
     AppContent()
 }
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun AppContent() {
     val items = listOf(
@@ -69,25 +81,82 @@ fun AppContent() {
             unselectedIcon = Icons.Outlined.Settings
         ),
     )
+    val windowClass = calculateWindowSizeClass()
+    val showNavigationRail = windowClass.widthSizeClass != WindowWidthSizeClass.Compact
+    var selectedItemIndex by rememberSaveable {
+        mutableStateOf(0)
+    }
 
     TabNavigator(HomeTab) { tabNavigator ->
         Scaffold(
             bottomBar = {
-                NavigationBar(
-                    modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
-                    containerColor = MaterialTheme.colorScheme.background,
-                    contentColor = contentColorFor(Color.Red),
-                    tonalElevation = 8.dp
-                ) {
-                    TabItem(HomeTab)
-                    TabItem(NotificationsTab)
-                    TabItem(ExploreTab)
-                    TabItem(SettingsTab)
+                if (!showNavigationRail){
+                    NavigationBar(
+                        modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
+                        containerColor = MaterialTheme.colorScheme.background,
+                        contentColor = contentColorFor(Color.Red),
+                        tonalElevation = 8.dp
+                    ) {
+                        TabItem(HomeTab)
+                        TabItem(NotificationsTab)
+                        TabItem(ExploreTab)
+                        TabItem(SettingsTab)
+                    }
                 }
             }
         ) {
             Column(modifier = Modifier.padding(top = it.calculateTopPadding())) {
                 CurrentTab()
+            }
+        }
+    }
+    if (showNavigationRail) {
+        NavigationSideBar(
+            items = items,
+            selectedItemIndex = selectedItemIndex,
+            onNavigate = {
+                selectedItemIndex = it
+            }
+        )
+
+        Box(
+            modifier = Modifier.fillMaxSize()
+                .padding(start = 80.dp)
+        ) {
+            when (selectedItemIndex) {
+                0 -> {
+
+                }
+
+                1 -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background)
+                    ) {
+                        TabNavigator(NotificationsTab)
+                    }
+                }
+
+                2 -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background)
+                    ) {
+                        TabNavigator(ExploreTab)
+                    }
+                }
+
+                3 -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background)
+                    ) {
+                        TabNavigator(SettingsTab)
+                    }
+                }
             }
         }
     }
