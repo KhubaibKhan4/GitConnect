@@ -1,13 +1,17 @@
 package org.company.app.data.remote.api
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.company.app.domain.model.UsersItem
+import org.company.app.utils.Constant.BASE_URL
 import org.company.app.utils.Constant.TIME_OUT
 
 object GithubApiClient {
@@ -33,5 +37,8 @@ object GithubApiClient {
             connectTimeoutMillis = TIME_OUT
             requestTimeoutMillis = TIME_OUT
         }
+    }
+    suspend fun getAllUsers(): List<UsersItem> {
+        return client.get("$BASE_URL/users").body()
     }
 }
