@@ -22,6 +22,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,6 +45,8 @@ import gitconnect.composeapp.generated.resources.open_github
 import gitconnect.composeapp.generated.resources.run
 import gitconnect.composeapp.generated.resources.stop
 import gitconnect.composeapp.generated.resources.theme
+import org.company.app.domain.model.UsersItem
+import org.company.app.domain.usecase.ResultState
 import org.company.app.openUrl
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.company.app.theme.LocalThemeIsDark
@@ -53,8 +57,28 @@ import org.koin.compose.koinInject
 
 @Composable
 fun HomeContent(
-    viewModel: MainViewModel = koinInject<MainViewModel>()
+    viewModel: MainViewModel = koinInject<MainViewModel>(),
 ) {
+    var usersData by remember { mutableStateOf<List<UsersItem>?>(null) }
+    LaunchedEffect(Unit) {
+        viewModel.getAllUsers()
+    }
+    val state by viewModel.allUsers.collectAsState()
+    when (state) {
+        is ResultState.ERROR -> {
+            val error = (state as ResultState.ERROR).error
+            ErrorBox(error)
+        }
+
+        is ResultState.LOADING -> {
+            LoadingBox()
+        }
+
+        is ResultState.SUCCESS -> {
+            val response = (state as ResultState.SUCCESS).response
+            usersData = response
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
