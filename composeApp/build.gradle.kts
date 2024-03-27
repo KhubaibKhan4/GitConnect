@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.ktor.client.content.negociation)
             implementation(libs.ktor.client.kotlinx.serialization.json)
             implementation(libs.ktor.client.logging)
+            implementation(libs.screen.size)
         }
 
         commonTest.dependencies {
