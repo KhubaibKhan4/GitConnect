@@ -20,6 +20,11 @@ import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 internal fun App() = AppTheme {
+
+}
+
+@Composable
+fun AppContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
