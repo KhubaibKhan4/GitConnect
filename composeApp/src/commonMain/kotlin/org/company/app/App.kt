@@ -37,6 +37,7 @@ import org.company.app.presentation.navigation.model.NavigationItem
 import org.company.app.presentation.navigation.tabs.ExploreTab
 import org.company.app.presentation.navigation.tabs.HomeTab
 import org.company.app.presentation.navigation.tabs.NotificationsTab
+import org.company.app.presentation.navigation.tabs.SettingsTab
 import org.company.app.theme.AppTheme
 
 @Composable
@@ -81,6 +82,7 @@ fun AppContent() {
                     TabItem(HomeTab)
                     TabItem(NotificationsTab)
                     TabItem(ExploreTab)
+                    TabItem(SettingsTab)
                 }
             }
         ) {
