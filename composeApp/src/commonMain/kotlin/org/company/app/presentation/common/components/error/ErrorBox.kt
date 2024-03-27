@@ -1,4 +1,4 @@
-package org.company.app.presentation.common.components
+package org.company.app.presentation.common.components.error
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
