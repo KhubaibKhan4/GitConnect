@@ -5,7 +5,7 @@ import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController = ComposeUIViewController { App() }
 fun startKoin(){
-    org.koin.core.context.startKoin {
+    startKoin {
         modules(appModule)
     }
 }
