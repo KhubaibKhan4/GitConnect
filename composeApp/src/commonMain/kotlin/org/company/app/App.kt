@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
@@ -37,6 +38,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
@@ -90,7 +92,7 @@ fun AppContent() {
     TabNavigator(HomeTab) { tabNavigator ->
         Scaffold(
             bottomBar = {
-                if (!showNavigationRail){
+                if (!showNavigationRail) {
                     NavigationBar(
                         modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
                         containerColor = MaterialTheme.colorScheme.background,
@@ -105,7 +107,12 @@ fun AppContent() {
                 }
             }
         ) {
-            Column(modifier = Modifier.padding(top = it.calculateTopPadding())) {
+            Column(
+                modifier = Modifier.padding(
+                    top = it.calculateTopPadding(),
+                    start = if (showNavigationRail) 80.dp else 6.dp
+                )
+            ) {
                 CurrentTab()
             }
         }
