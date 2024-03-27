@@ -63,6 +63,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.voyager.navigator)
+            implementation(libs.voyager.tab.navigator)
+            implementation(libs.voyager.transitions)
             implementation(libs.napier)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.moko.mvvm)

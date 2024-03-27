@@ -3,6 +3,15 @@ package org.company.app
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,6 +21,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import gitconnect.composeapp.generated.resources.*
+import org.company.app.presentation.navigation.model.NavigationItem
 import org.company.app.theme.AppTheme
 import org.company.app.theme.LocalThemeIsDark
 import org.jetbrains.compose.resources.Font
@@ -20,11 +30,33 @@ import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 internal fun App() = AppTheme {
-
+    AppContent()
 }
 
 @Composable
 fun AppContent() {
+    val items = listOf(
+        NavigationItem(
+            title = "Home",
+            selectedIcon = Icons.Filled.Home,
+            unselectedIcon = Icons.Outlined.Home
+        ),
+        NavigationItem(
+            title = "Notification",
+            selectedIcon = Icons.Filled.Notifications,
+            unselectedIcon = Icons.Outlined.Notifications
+        ),
+        NavigationItem(
+            title = "Explore",
+            selectedIcon = Icons.Filled.Search,
+            unselectedIcon = Icons.Outlined.Search
+        ),
+        NavigationItem(
+            title = "Settings",
+            selectedIcon = Icons.Filled.Settings,
+            unselectedIcon = Icons.Outlined.Settings
+        ),
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()
