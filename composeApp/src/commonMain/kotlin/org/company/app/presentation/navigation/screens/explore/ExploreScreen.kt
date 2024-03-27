@@ -1,4 +1,4 @@
-package org.company.app.presentation.navigation.screens
+package org.company.app.presentation.navigation.screens.explore
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
@@ -50,7 +50,7 @@ import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
-class NotificationsScreen: Screen{
+class ExploreScreen: Screen{
     @Composable
     override fun Content() {
         Column(
@@ -61,7 +61,7 @@ class NotificationsScreen: Screen{
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Notifications",
+                text = "Explore",
                 fontFamily = FontFamily(Font(Res.font.IndieFlower_Regular)),
                 style = MaterialTheme.typography.displayLarge
             )

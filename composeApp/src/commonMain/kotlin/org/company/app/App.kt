@@ -45,10 +45,10 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import org.company.app.presentation.navigation.model.NavigationItem
 import org.company.app.presentation.navigation.sidebar.NavigationSideBar
-import org.company.app.presentation.navigation.tabs.ExploreTab
-import org.company.app.presentation.navigation.tabs.HomeTab
-import org.company.app.presentation.navigation.tabs.NotificationsTab
-import org.company.app.presentation.navigation.tabs.SettingsTab
+import org.company.app.presentation.navigation.tabs.explore.ExploreTab
+import org.company.app.presentation.navigation.tabs.home.HomeTab
+import org.company.app.presentation.navigation.tabs.notifications.NotificationsTab
+import org.company.app.presentation.navigation.tabs.settings.SettingsTab
 import org.company.app.theme.AppTheme
 
 @Composable
