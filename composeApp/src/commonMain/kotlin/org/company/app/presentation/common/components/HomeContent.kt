@@ -148,5 +148,6 @@ fun HomeContent(
         ) {
             Text(stringResource(Res.string.open_github))
         }
+        Text(usersData.toString())
     }
 }
