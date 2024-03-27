@@ -1,5 +1,6 @@
 package org.company.app.presentation.common.components.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -20,10 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.navigator.LocalNavigator
 import io.kamel.core.Resource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.company.app.domain.model.UsersItem
+import org.company.app.presentation.common.components.detail.UsersDetail
 
 @Composable
 fun UserList(users: List<UsersItem>) {
@@ -51,11 +54,15 @@ fun UserList(users: List<UsersItem>) {
 fun UsersItem(
     usersItem: UsersItem,
 ) {
+    val navigator = LocalNavigator.current
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
+            .clickable {
+                navigator?.push(UsersDetail(usersItem))
+            }
     ) {
         val image: Resource<Painter> = asyncPainterResource(data = usersItem.avatarUrl)
         KamelImage(
