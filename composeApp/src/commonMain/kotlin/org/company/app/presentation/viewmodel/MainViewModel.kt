@@ -9,19 +9,32 @@ import org.company.app.domain.model.UsersItem
 import org.company.app.domain.repository.Repository
 import org.company.app.domain.usecase.ResultState
 
-class MainViewModel(private val repository: Repository): ViewModel() {
+class MainViewModel(private val repository: Repository) : ViewModel() {
 
     private val _allUsers = MutableStateFlow<ResultState<List<UsersItem>>>(ResultState.LOADING)
     var allUsers: StateFlow<ResultState<List<UsersItem>>> = _allUsers.asStateFlow()
 
-    fun getAllUsers(){
+    private val _getFollowers = MutableStateFlow<ResultState<List<UsersItem>>>(ResultState.LOADING)
+    var getFollowers: StateFlow<ResultState<List<UsersItem>>> = _getFollowers.asStateFlow()
+    fun getAllUsers() {
         viewModelScope.launch {
             _allUsers.value = ResultState.LOADING
             try {
                 val response = repository.getAllUsers()
                 _allUsers.value = ResultState.SUCCESS(response)
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 _allUsers.value = ResultState.ERROR(e)
+            }
+        }
+    }
+    fun getFollowers(username: String){
+        viewModelScope.launch {
+            _getFollowers.value = ResultState.LOADING
+            try {
+                val response = repository.getFollowers(username)
+                _getFollowers.value = ResultState.SUCCESS(response)
+            }catch (e: Exception){
+                _getFollowers.value = ResultState.ERROR(e)
             }
         }
     }
