@@ -10,7 +10,7 @@ class Repository : GithubApi {
         return GithubApiClient.getAllUsers()
     }
 
-    override suspend fun getFollowers(username: String): UserDetail {
-        return GithubApiClient.getFollowers(username)
+    override suspend fun getUsersDetails(username: String): UserDetail {
+        return GithubApiClient.getUsersDetails(username)
     }
 }
