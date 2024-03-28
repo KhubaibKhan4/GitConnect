@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -96,6 +97,9 @@ fun UsersDetailContent(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
+                .padding(top = it.calculateTopPadding()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
 
             Row(
@@ -103,11 +107,11 @@ fun UsersDetailContent(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val image: Resource<Painter> = asyncPainterResource(data = usersItem.avatarUrl)
+                val image: Resource<Painter> = asyncPainterResource(data = usersData?.avatarUrl.toString())
                 KamelImage(
                     resource = image,
                     contentDescription = "Avatar",
-                    modifier = Modifier.size(45.dp)
+                    modifier = Modifier.size(65.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Column(
