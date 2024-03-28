@@ -56,21 +56,23 @@ fun UsersDetailContent(
     viewModel: MainViewModel = koinInject<MainViewModel>(),
 ) {
     var usersData by remember { mutableStateOf<UserDetail?>(null) }
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         viewModel.getFollowers(usersItem.login)
     }
     val state by viewModel.getFollowers.collectAsState()
-    when(state){
-        is ResultState.ERROR ->{
+    when (state) {
+        is ResultState.ERROR -> {
             val error = (state as ResultState.ERROR).error
             ErrorBox(error)
         }
+
         ResultState.LOADING -> {
             LoadingBox()
         }
+
         is ResultState.SUCCESS -> {
             val response = (state as ResultState.SUCCESS).response
-
+            usersData = response
         }
     }
     Scaffold(
@@ -114,13 +116,13 @@ fun UsersDetailContent(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = usersItem.login,
+                        text = usersData?.name.toString(),
                         modifier = Modifier.fillMaxWidth(),
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = MaterialTheme.typography.headlineMedium.fontSize
                     )
                     Text(
-                        text = usersItem.avatarUrl,
+                        text = usersItem.login,
                         modifier = Modifier.fillMaxWidth(),
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = MaterialTheme.typography.headlineMedium.fontSize
