@@ -57,9 +57,9 @@ fun UsersDetailContent(
 ) {
     var usersData by remember { mutableStateOf<UserDetail?>(null) }
     LaunchedEffect(Unit) {
-        viewModel.getFollowers(usersItem.login)
+        viewModel.getUsersDetail("KhubaibKhan4")
     }
-    val state by viewModel.getFollowers.collectAsState()
+    val state by viewModel.getUsersDetails.collectAsState()
     when (state) {
         is ResultState.ERROR -> {
             val error = (state as ResultState.ERROR).error

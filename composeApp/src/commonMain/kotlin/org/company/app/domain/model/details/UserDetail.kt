@@ -9,15 +9,15 @@ data class UserDetail(
     @SerialName("avatar_url")
     val avatarUrl: String,
     @SerialName("bio")
-    val bio: String,
+    val bio: String? = null,
     @SerialName("blog")
     val blog: String,
     @SerialName("company")
-    val company: String,
+    val company: String? = null,
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("email")
-    val email: String,
+    val email: String? = null,
     @SerialName("events_url")
     val eventsUrl: String,
     @SerialName("followers")
@@ -33,7 +33,7 @@ data class UserDetail(
     @SerialName("gravatar_id")
     val gravatarId: String,
     @SerialName("hireable")
-    val hireable: Boolean,
+    val hireable: String? = null,
     @SerialName("html_url")
     val htmlUrl: String,
     @SerialName("id")
@@ -63,7 +63,7 @@ data class UserDetail(
     @SerialName("subscriptions_url")
     val subscriptionsUrl: String,
     @SerialName("twitter_username")
-    val twitterUsername: String,
+    val twitterUsername: String? = null,
     @SerialName("type")
     val type: String,
     @SerialName("updated_at")

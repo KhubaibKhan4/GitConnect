@@ -15,8 +15,8 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     private val _allUsers = MutableStateFlow<ResultState<List<UsersItem>>>(ResultState.LOADING)
     var allUsers: StateFlow<ResultState<List<UsersItem>>> = _allUsers.asStateFlow()
 
-    private val _getFollowers = MutableStateFlow<ResultState<UserDetail>>(ResultState.LOADING)
-    var getFollowers: StateFlow<ResultState<UserDetail>> = _getFollowers.asStateFlow()
+    private val _getUsersDetails = MutableStateFlow<ResultState<UserDetail>>(ResultState.LOADING)
+    var getUsersDetails: StateFlow<ResultState<UserDetail>> = _getUsersDetails.asStateFlow()
     fun getAllUsers() {
         viewModelScope.launch {
             _allUsers.value = ResultState.LOADING
@@ -29,14 +29,14 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getFollowers(username: String) {
+    fun getUsersDetail(username: String) {
         viewModelScope.launch {
-            _getFollowers.value = ResultState.LOADING
+            _getUsersDetails.value = ResultState.LOADING
             try {
-                val response = repository.getFollowers(username)
-                _getFollowers.value = ResultState.SUCCESS(response)
+                val response = repository.getUsersDetails(username)
+                _getUsersDetails.value = ResultState.SUCCESS(response)
             } catch (e: Exception) {
-                _getFollowers.value = ResultState.ERROR(e)
+                _getUsersDetails.value = ResultState.ERROR(e)
             }
         }
     }
