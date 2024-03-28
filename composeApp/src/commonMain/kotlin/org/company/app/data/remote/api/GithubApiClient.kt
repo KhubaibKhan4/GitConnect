@@ -11,6 +11,7 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.company.app.domain.model.UsersItem
+import org.company.app.domain.model.details.UserDetail
 import org.company.app.utils.Constant.BASE_URL
 import org.company.app.utils.Constant.TIME_OUT
 
@@ -43,7 +44,7 @@ object GithubApiClient {
         return client.get("$BASE_URL/users").body()
     }
 
-    suspend fun getFollowers(username: String): List<UsersItem> {
+    suspend fun getFollowers(username: String): UserDetail {
         return client.get("$BASE_URL/users/$username/followers").body()
     }
 }
