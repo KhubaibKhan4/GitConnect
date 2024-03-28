@@ -44,7 +44,7 @@ object GithubApiClient {
         return client.get("$BASE_URL/users").body()
     }
 
-    suspend fun getFollowers(username: String): UserDetail {
-        return client.get("$BASE_URL/users/$username/followers").body()
+    suspend fun getUsersDetails(username: String): UserDetail {
+        return client.get("$BASE_URL/users/$username").body()
     }
 }
