@@ -32,7 +32,7 @@ import org.company.app.presentation.common.components.detail.UsersDetail
 fun UserList(users: List<UsersItem>) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
     ) {
         Text(
             text = "GitHub Users",
