@@ -17,6 +17,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -27,6 +33,10 @@ import io.kamel.core.Resource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.company.app.domain.model.UsersItem
+import org.company.app.domain.model.details.UserDetail
+import org.company.app.domain.usecase.ResultState
+import org.company.app.presentation.common.components.error.ErrorBox
+import org.company.app.presentation.common.components.loading.LoadingBox
 import org.company.app.presentation.viewmodel.MainViewModel
 import org.koin.compose.koinInject
 
@@ -45,6 +55,24 @@ fun UsersDetailContent(
     usersItem: UsersItem,
     viewModel: MainViewModel = koinInject<MainViewModel>(),
 ) {
+    var usersData by remember { mutableStateOf<UserDetail?>(null) }
+    LaunchedEffect(Unit){
+        viewModel.getFollowers(usersItem.login)
+    }
+    val state by viewModel.getFollowers.collectAsState()
+    when(state){
+        is ResultState.ERROR ->{
+            val error = (state as ResultState.ERROR).error
+            ErrorBox(error)
+        }
+        ResultState.LOADING -> {
+            LoadingBox()
+        }
+        is ResultState.SUCCESS -> {
+            val response = (state as ResultState.SUCCESS).response
+
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(
