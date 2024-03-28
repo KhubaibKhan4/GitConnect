@@ -38,7 +38,12 @@ object GithubApiClient {
             requestTimeoutMillis = TIME_OUT
         }
     }
+
     suspend fun getAllUsers(): List<UsersItem> {
         return client.get("$BASE_URL/users").body()
+    }
+
+    suspend fun getFollowers(username: String): List<UsersItem> {
+        return client.get("$BASE_URL/users/$username/followers").body()
     }
 }
