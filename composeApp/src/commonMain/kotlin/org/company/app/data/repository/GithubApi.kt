@@ -5,5 +5,5 @@ import org.company.app.domain.model.details.UserDetail
 
 interface GithubApi {
     suspend fun getAllUsers(): List<UsersItem>
-    suspend fun getFollowers(username: String): UserDetail
+    suspend fun getUsersDetails(username: String): UserDetail
 }
