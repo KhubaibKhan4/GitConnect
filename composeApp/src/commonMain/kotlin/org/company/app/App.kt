@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
@@ -108,10 +111,12 @@ fun AppContent() {
             }
         ) {
             Column(
-                modifier = Modifier.padding(
-                    top = it.calculateTopPadding(),
-                    start = if (showNavigationRail) 80.dp else 6.dp
-                )
+                modifier = Modifier
+                    .windowInsetsPadding(WindowInsets.navigationBars)
+                    .padding(
+                        start = if (showNavigationRail) 80.dp else 0.dp,
+                        top = it.calculateTopPadding()
+                    )
             ) {
                 CurrentTab()
             }

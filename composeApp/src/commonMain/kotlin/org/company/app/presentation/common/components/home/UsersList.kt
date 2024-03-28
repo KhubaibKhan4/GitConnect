@@ -33,6 +33,7 @@ fun UserList(users: List<UsersItem>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(start = 6.dp)
     ) {
         Text(
             text = "GitHub Users",
