@@ -4,5 +4,5 @@ import org.company.app.domain.model.UsersItem
 
 interface GithubApi {
     suspend fun getAllUsers(): List<UsersItem>
-    suspend fun getFollowers(username: String): List<UsersItem>
+    suspend fun getFollowers(username: String): UsersItem
 }
